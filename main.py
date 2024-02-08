@@ -43,7 +43,15 @@ def main():
         )
         .execute()
     )
-    pprint.pprint(res)
+    dict = {}
+    for i in res['items']:
+        pprint.pprint(i['snippet'])
+        pprint.pprint(i['title'])
+        pprint.pprint(i['formattedUrl'])
+    # pprint.pprint(i['snippet'])
+    # pprint.pprint(len(res['items']))
+    # pprint.pprint(res['items'][0]['title'])
+
 
 
 if __name__ == "__main__":

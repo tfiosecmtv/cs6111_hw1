@@ -25,6 +25,7 @@ E6111 Project #1 - Richard Han, Aidana Imangozhina
 """
 
 import sys
+import module
 import random
 from googleapiclient.discovery import build
 
@@ -67,15 +68,15 @@ def perform_user_feedback(items):
     
     return relevant_items
 
-def add_randomword(query):
-    """
-    Add a random word to the query to refine it for now. TODO: This will be replaced by step 4.
-    """
-    random_words = ['sf', 'los angeles', 'california', 'newyork']
-    random_word = random.choice(random_words)
-    new_query = query + " " + random_word
-    print(f"Augmenting by {random_word}")
-    return new_query, random_word
+# def add_randomword(query):
+#     """
+#     Add a random word to the query to refine it for now. TODO: This will be replaced by step 4.
+#     """
+#     random_words = ['sf', 'los angeles', 'california', 'newyork']
+#     random_word = random.choice(random_words)
+#     new_query = query + " " + random_word
+#     print(f"Augmenting by {random_word}")
+#     return new_query, random_word
 
 def feedback_summary(api_key, cse_id, query, precision, target_precision, augmentation):
     """
@@ -141,8 +142,14 @@ def main():
             print("Desired precision reached. Done.")
             break
         else:
+            snippets = []
+            for item in relevant_items:
+                snippets.append(item["snippet"])
+            new_words = module.extract_new_words(original_query=query, relevant_docs=snippets)
             print("Desired precision not reached. Refining your query.")
-            query, augmentation = add_randomword(query)
+            for word in new_words:
+                query += " " +  word
+            # query, augmentation = add_randomword(query)
             feedback_summary(api_key, cse_id, query, precision_finished, target_precision, augmentation)
 
 if __name__ == "__main__":

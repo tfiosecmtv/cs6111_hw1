@@ -83,6 +83,22 @@ We have the main function and we begin by validating command line arguments to e
 
 Using search_google(), we get search results based on the current query. Through process_user_feedback(), we gather user input on the relevance of each search result with result, title, URL and summary. User can also go into URL to see if link is relevant or not. After that is completed, we also determine the precision of the current search results based on user feedback and decide whether further augmentation and refinement is needed. If the precision achieved based on user feedback is below the target precision we set, we identify new words to augment the query using our algorithm and update the query accordingly. We continue this process until the precision meets or exceeds the target. Another instance is when the precision is 0.0 at any given point, we exit out of the program. All our runs achieved over 0.9 precision on our first iteration run.
 
+The Google Search API we utilize handles non-HTML files by indexing their content and making it searchable alongside traditional web pages. This feature enhances the ability to search and retrieve a wide range of information from the web through the API. For example, when we search for columbia ppt file, using our program, it was able to find the exact ppt with exact wording summary extracted from non html file, ppt in this case.
+
+```
+Title: FileNewTemplate
+URL: https://engineering.columbia.edu/files/engineering/template_presentations-FY16-102615.ppt
+Summary: Content slide: white background, top tab; Content slide: black background, white tab. TRANSCENDING DISCIPLINES, TRANSFORMING LIVES. 3 | Presentation Title ...
+```
+
+Furthermore, we further searched through Columbia pdf files, and we are able to obtain pdf file with comprehensive summary indicated from the search.
+
+```
+Title: COLUMBIA-SUICIDE SEVERITY RATING SCALE (C-SSRS)
+URL: https://cssrs.columbia.edu/wp-content/uploads/C-SSRS_Pediatric-SLC_11.14.16.pdf
+Summary: Definitions of behavioral suicidal events in this scale are based on those used in The Columbia Suicide History. Form, developed by John Mann, ...
+```
+
 ## Detailed description of query-modification method
 
 

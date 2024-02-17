@@ -84,7 +84,7 @@ def extract_new_words(original_query, relevant_docs):
     if v == max_value:
       words_with_max_weight.append(k)
   words_with_second_max_weight = []
-  # In the event if the relevant document only has one word
+  # In the event if there is only one unique word with highest score
   if len(words_with_max_weight) == 1:
     if second_max_value is not None:
       for k,v in dict_of_weights.items():
@@ -92,8 +92,9 @@ def extract_new_words(original_query, relevant_docs):
           words_with_second_max_weight.append(k)
     else:
       return words_with_max_weight
-    sorted_list = sorted(words_with_second_max_weight)
-    return [words_with_max_weight[0], sorted_list[-1]]
-  # Return two new words to append to the original query
-  sorted_list = sorted(words_with_max_weight)
-  return [sorted_list[-1], sorted_list[-2]]
+    # Sort alphabetically
+    sorted_list = sorted(words_with_second_max_weight, key=len, reverse=True)
+    return [words_with_max_weight[0], sorted_list[0]]
+  # Return alphabetically sorted two new words to append to the original query
+  sorted_list = sorted(words_with_max_weight,  key=len, reverse=True)
+  return [sorted_list[0], sorted_list[1]]

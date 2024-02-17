@@ -40,9 +40,12 @@ def process_user_feedback(items):
     """
     User feedback function where we have them analyze the result
     """
+    #Initialize relevant_items
     relevant_items = []  
     #We get the result with result, title, URL, summary, and Y/N
+    #Initialize counter to iterate through items
     i = 0
+    #We do while loop until we have 10 results
     while i != 10:
         message = (
             f"Result {i+1}:\n"
@@ -51,13 +54,17 @@ def process_user_feedback(items):
             f"Summary: {items[i]['snippet']}\n"
             "Relevant (Y/N)? "
         )
+        #Ask for feedback from the user
         feedback = input(message).strip().lower()
+        #If it's either y or yes
         if feedback in ('y', 'yes'):
             relevant_items.append(items[i])
             i+=1
+        #If n or no, in this case
         elif feedback in ('n', 'no'):
             i+=1
             continue
+        #If it's any other keys including enter key, we state it's wrong input
         else:
             print("Wrong input. Please choose yes (y) or no (n)")
             i -= 1

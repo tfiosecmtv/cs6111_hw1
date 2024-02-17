@@ -42,11 +42,11 @@ def process_user_feedback(items):
     """
     #Initialize relevant_items
     relevant_items = []  
-    #We get the result with result, title, URL, summary, and Y/N
     #Initialize counter to iterate through items
     i = 0
     #We do while loop until we have 10 results
     while i != 10:
+        #We get the result with result, title, URL, summary, and Y/N
         message = (
             f"Result {i+1}:\n"
             f"Title: {items[i]['title']}\n"

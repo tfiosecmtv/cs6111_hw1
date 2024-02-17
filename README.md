@@ -8,8 +8,11 @@ Aidana Imangozhina (ai2523)
 
 ## Files we're submitting
 main.py
+
 module.py
+
 proj1-stop.txt
+
 transcript.pdf
 
 ## Getting Started

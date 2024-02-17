@@ -19,10 +19,12 @@
 
 E6111 Project #1 - Richard Han, Aidana Imangozhina
 """
-
+import warnings
 import sys
 import module
 from googleapiclient.discovery import build
+
+warnings.simplefilter('ignore')
 
 def search_google(api_key, cse_id, search_query):
     """
@@ -40,17 +42,25 @@ def process_user_feedback(items):
     """
     relevant_items = []  
     #We get the result with result, title, URL, summary, and Y/N
-    for index, item in enumerate(items, start=1):
+    i = 0
+    while i != 10:
         message = (
-            f"Result {index}:\n"
-            f"Title: {item['title']}\n"
-            f"URL: {item['link']}\n"
-            f"Summary: {item['snippet']}\n"
+            f"Result {i+1}:\n"
+            f"Title: {items[i]['title']}\n"
+            f"URL: {items[i]['link']}\n"
+            f"Summary: {items[i]['snippet']}\n"
             "Relevant (Y/N)? "
         )
         feedback = input(message).strip().lower()
         if feedback in ('y', 'yes'):
-            relevant_items.append(item)
+            relevant_items.append(items[i])
+            i+=1
+        elif feedback in ('n', 'no'):
+            i+=1
+            continue
+        else:
+            print("Wrong input. Please choose yes (y) or no (n)")
+            i -= 1
     #We return the relevant items 
     return relevant_items
 
@@ -96,12 +106,18 @@ def feedback_summary(api_key, cse_id, query, precision, target_precision, new_wo
         print("Augmenting by", " ".join(new_words) if new_words else "")
 
 def main():
+    usage_msg = "Usage: /home/ai2523/run <google api key> <google engine id> <precision> <query>"
     if len(sys.argv) < 5:
         #This is the format of using the program. If less than the correct arg, we exit
-        print("Usage: /home/aidana/run <google api key> <google engine id> <precision> <query>")
+        print(usage_msg)
         sys.exit(1)
 
     _, api_key, cse_id, precision, *query_parts = sys.argv
+    if len(query_parts) > 1:
+        # Print usage message in case query does not contain single or double quotation
+        print(usage_msg)
+        sys.exit(1)
+
     query = " ".join(query_parts)
     #We declare target precision for comparison
     target_precision = float(precision)

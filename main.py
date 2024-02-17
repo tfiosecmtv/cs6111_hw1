@@ -70,7 +70,7 @@ def print_initial_parameters(api_key, cse_id, query, target_precision):
 def feedback_summary(api_key, cse_id, query, precision, target_precision, new_words=[]):
     """
     Print feedback summary with updated augmentation information if it's available
-    We reuse the feedback summary for code clarity and effiiency
+    We reuse the feedback summary for code clarity and efficiency
     """
     # Initialize augmented new query with the current query
     new_query = query

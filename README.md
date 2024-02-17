@@ -3,6 +3,7 @@ This is our README of our project 1. We achieve over 0.9 threshold of precision 
 
 ## Authors
 Richard Han (dh3062)
+
 Aidana Imangozhina (ai2523)
 
 ## Files we're submitting

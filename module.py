@@ -93,8 +93,8 @@ def extract_new_words(original_query, relevant_docs):
     else:
       return words_with_max_weight
     # Sort alphabetically
-    sorted_list = sorted(words_with_second_max_weight, key=len, reverse=True)
+    sorted_list = sorted(words_with_second_max_weight)
     return [words_with_max_weight[0], sorted_list[0]]
   # Return alphabetically sorted two new words to append to the original query
-  sorted_list = sorted(words_with_max_weight,  key=len, reverse=True)
-  return [sorted_list[0], sorted_list[1]]
+  sorted_list = sorted(words_with_max_weight)
+  return [sorted_list[-1], sorted_list[-2]]

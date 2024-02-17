@@ -94,7 +94,7 @@ Using search_google(), we get search results based on the current query. Through
 6. We sum all the rows to get the overall score for each word (feature) to see their overall presence in all relevant documents.
 7. We iterate through the features (unique words) and if they appear in the sentence which has the highest cosine similarity, we add them to the newly initialized dictionary (key: word, value: overall score or sum of rows for that word).
 8. From that dictionary we get two words with the highest score. If the most similar document has one word we return only one word, but this scenario is highly unlikely and was considered for error handling.
-9. If we have multiple words with the equal highest score we return by length. The ordering for returning words: highest score and then the longest word. For example, covid19 and vaccination have equal scores, we return "vaccination covid19". We always return two words to append to the previous query unless the most similar document contains only word (very unlikely scenario).
+9. If we have multiple words with the equal highest score sorted by length, but we return the last two elements from the sorted list because we identified it gave us most consistent and optimal results. We tried ordering by length (from the longest to the shortest words) and alphabetically from the start, but it gave us less relevant results.
 
 
 

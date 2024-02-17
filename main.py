@@ -67,7 +67,6 @@ def process_user_feedback(items):
         #If it's any other keys including enter key, we state it's wrong input
         else:
             print("Wrong input. Please choose yes (y) or no (n)")
-            i -= 1
     #We return the relevant items 
     return relevant_items
 

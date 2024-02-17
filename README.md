@@ -1,5 +1,6 @@
 # E6111 Project 1 
 This is our README of our project 1. We achieve over 0.9 threshold of precision each time with our query augmentation method. 
+We have commented the code with detail with explanation for each functions and commands.  
 
 ## Authors
 Richard Han(dh3062)
@@ -26,10 +27,12 @@ Run the project using command:
 ### Keys / EngineID
 
 Google API key = AIzaSyDU0M8qHB6gcorISsUwROoEEINdkLxL-6g 
-Google Engine ID = 75a89ae4175564bf3
-Precision = 0.9
 
-### Clear description of the internal design of your project
+Google Engine ID = 75a89ae4175564bf3
+
+Precision = 0.9 #This value can be
+
+### Clear description of the internal design of our project
 
 ```
 ```

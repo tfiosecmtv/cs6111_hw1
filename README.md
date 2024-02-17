@@ -4,6 +4,7 @@ We have commented the code with detail with explanation for each functions and c
 
 ## Authors
 Richard Han(dh3062)
+
 Aidana Imangozhina(ai2523)
 
 ## Files we're submitting

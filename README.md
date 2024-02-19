@@ -106,14 +106,14 @@ Summary: Definitions of behavioral suicidal events in this scale are based on th
 ## Detailed description of query-modification method
 
 
-1. We referred to tf-idf embedding and cosine similarity techniqes from the lecture. We clean up the user marked relevant queries using the stop words file from the project page and remove any punctuation signs from the documents.
+1. We referred to tf-idf embedding and cosine similarity techniques from the lecture. We clean up the user marked relevant queries using the stop words file from the project page and remove any punctuation signs from the documents.
 2. We use tf-idf embedding from "scikit-learn" to get vector representation and weights of the documents and query.
 3. For each separate word or feature in the vectorizer we create a dataframe and store their score for each document. However, we do not include query since we are considering new words which are not in the query to avoid duplicates.
 4. We extract feature names, e.g. unique words that were in the relevant documents and create a dataframe using the words as columns. Each row is the score of the features calculated for each relevant document.
 6. We sum all the rows to get the overall score for each word (feature) to see their overall presence in all relevant documents.
 7. We create two dictionaries (key: word, value: score) for documents with the highest and second highest score. We iterate through the features (unique words), and put them to the dictionary if their scores are equal to the highest or the second highest score.
 8. We order words based on their score. If we have multiple words with the highest score or only one element with the first highest score and multiple elements with the second highest score, we need to decide the order using cosine similarity between words and the previous query.
-9. To decide the ordering we use FastText model from the gensim library to get vector representation for each word, and we use relevant documents as training data. We chose this model since gensim is a good tool for similarity analysis, and FastText is optimized to get word embeddings and is a smaller model. After getting vector representation we calculate cosine similarity for each word and the previous query.
+9. To decide the ordering we use FastText model from the gensim library to get vector representation for each word, and we use relevant documents as training data. We chose this model since gensim library includes Word2Vec representation to understand context better which is handy for similarity analysis, and FastText is optimized to get word embeddings and is a smaller model given the scope of the project, and we're still getting optimal results. After getting vector representation we calculate cosine similarity for each word and the previous query from "scikit-learn".
 
 
 

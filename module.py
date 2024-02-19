@@ -1,4 +1,5 @@
 import warnings
+import os
 from string import punctuation
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
@@ -10,7 +11,8 @@ warnings.simplefilter('ignore')
 # read stop words from the project file
 stop_words = []
 # Open the file below
-f = open('proj1-stop.txt', 'r')
+proj1_stop_path = os.path.join(os.path.dirname(__file__), "proj1-stop.txt")
+f = open(proj1_stop_path, 'r')
 # For word in f, we do the following
 for word in f:
     # Remove leading or trailing whitespace from the word and add it to list

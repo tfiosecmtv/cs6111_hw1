@@ -32,6 +32,22 @@ If you want to run it in local machine, run with following
 python3 main.py <google api key> <google engine id> <precision> <query>
 ```
 
+Commands to install necessary software if running on local machine:
+If using python3:
+
+pip3 install scikit-learn
+pip3 install pandas
+pip3 install gensim
+pip3 install google-api-python-client
+pip3 install numpy
+
+If using python:
+
+pip install scikit-learn
+pip install pandas
+pip install gensim
+pip install google-api-python-client
+pip install numpy
 
 ### Keys / EngineID
 

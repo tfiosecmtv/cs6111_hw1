@@ -1,11 +1,11 @@
-import pprint
+import warnings
 from string import punctuation
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from gensim.models import FastText
 from sklearn.metrics.pairwise import cosine_similarity
 
-
+warnings.simplefilter('ignore')
 
 # read stop words from the project file
 stop_words = []

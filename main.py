@@ -42,10 +42,12 @@ def process_user_feedback(items):
     """
     relevant_items = []  
     i = 0
+    #While look to ensure the condition
     while i != 10:
         title = items[i].get('title', 'No title available')
         link = items[i].get('link', 'No URL available')
         snippet = items[i].get('snippet', 'No summary available')
+        #We get the result with result, title, URL, summary, and Y/N
         message = (
             f"Result {i+1}:\n"
             f"Title: {title}\n"

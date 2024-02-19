@@ -40,18 +40,17 @@ def process_user_feedback(items):
     """
     User feedback function where we have them analyze the result
     """
-    #Initialize relevant_items
     relevant_items = []  
-    #Initialize counter to iterate through items
     i = 0
-    #We do while loop until we have 10 results
     while i != 10:
-        #We get the result with result, title, URL, summary, and Y/N
+        title = items[i].get('title', 'No title available')
+        link = items[i].get('link', 'No URL available')
+        snippet = items[i].get('snippet', 'No summary available')
         message = (
             f"Result {i+1}:\n"
-            f"Title: {items[i]['title']}\n"
-            f"URL: {items[i]['link']}\n"
-            f"Summary: {items[i]['snippet']}\n"
+            f"Title: {title}\n"
+            f"URL: {link}\n"
+            f"Summary: {snippet}\n"
             "Relevant (Y/N)? "
         )
         #Ask for feedback from the user

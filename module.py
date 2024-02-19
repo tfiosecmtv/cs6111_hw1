@@ -114,8 +114,10 @@ def extract_new_words(original_query, relevant_docs):
   words_with_second_max_weight = []
   # Match the maximum weight value to get the word from dictionary
   for k,v in dict_of_weights.items():
+    # If current word's weight equals the maximum weight, we append word to the list of words with max weight
     if v == max_value:
       words_with_max_weight.append(k)
+    # If current word's weight equals second maximum weight, we append word to the list of words with second max weight
     if v == second_max_value:
       words_with_second_max_weight.append(k)
   # Calculate similarity between query and words with the highest weights

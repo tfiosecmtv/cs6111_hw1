@@ -40,9 +40,11 @@ def process_user_feedback(items):
     """
     User feedback function where we have them analyze the result
     """
+    #Declare relevant items
     relevant_items = []  
+    #Declare i as 0
     i = 0
-    #While look to ensure the condition
+    #While loop to ensure the condition
     while i != 10:
         title = items[i].get('title', 'No title available')
         link = items[i].get('link', 'No URL available')

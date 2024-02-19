@@ -27,6 +27,12 @@ Run the project using command:
 /home/ai2523/run <google api key> <google engine id> <precision> <query>
 ```
 
+If you want to run it in local machine, run with following
+```
+python3 main.py <google api key> <google engine id> <precision> <query>
+```
+
+
 ### Keys / EngineID
 
 Google API key = AIzaSyDU0M8qHB6gcorISsUwROoEEINdkLxL-6g 

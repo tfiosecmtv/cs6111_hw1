@@ -34,28 +34,36 @@ python3 main.py <google api key> <google engine id> <precision> <query>
 
 Commands to install necessary software if running on local machine:
 If using python3:
-
+```
 pip3 install scikit-learn
 pip3 install pandas
 pip3 install gensim
 pip3 install google-api-python-client
 pip3 install numpy
+```
 
 If using python:
-
+```
 pip install scikit-learn
 pip install pandas
 pip install gensim
 pip install google-api-python-client
 pip install numpy
-
-### Keys / EngineID
+```
+### Keys / Engine ID
 
 Google API key = AIzaSyDU0M8qHB6gcorISsUwROoEEINdkLxL-6g 
 
 Google Engine ID = 75a89ae4175564bf3
 
 Precision = 0.9 #This value can be changed by user.
+
+```
+Google API Key: Google Custom Search Engine JSON API Key.
+Google Engine ID: Google Custom Search Engine ID.
+Precision: The target value precision of search results. This could be value like 0.7, 0.8, 0.9.
+Query: The search query from user in double quotation.
+```
 
 ### Clear description of the internal design of our project
 

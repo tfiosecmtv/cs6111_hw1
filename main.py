@@ -112,7 +112,7 @@ def feedback_summary(api_key, cse_id, query, precision, target_precision, new_wo
         print("Augmenting by", " ".join(new_words) if new_words else "")
 
 def main():
-    usage_msg = "Usage: /home/ai2523/run <google api key> <google engine id> <precision> <query>"
+    usage_msg = "Usage: python3 main.py <google api key> <google engine id> <precision> <query>"
     if len(sys.argv) < 5:
         #This is the format of using the program. If less than the correct arg, we exit
         print(usage_msg)

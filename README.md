@@ -81,19 +81,23 @@ Using search_google(), we get search results based on the current query. Through
 
 The Google Search API we utilize handles non-HTML files by indexing through the content and making it searchable alongside traditional web pages. This feature enhances the ability to search and retrieve a wide range of information from the web through the API. For example, when we search for columbia ppt file, using our program, it was able to find the exact ppt with exact wording summary extracted from non html file, ppt in this case.
 
-```
-Title: FileNewTemplate
-URL: https://engineering.columbia.edu/files/engineering/template_presentations-FY16-102615.ppt
-Summary: Content slide: white background, top tab; Content slide: black background, white tab. TRANSCENDING DISCIPLINES, TRANSFORMING LIVES. 3 | Presentation Title ...
-```
+### Handling non-HTML files
 
-Furthermore, we further searched through Columbia pdf files, and we are able to obtain pdf file with comprehensive summary indicated from the search.
+We are including all results from HTML and non-HTML results based on top 10 results returned by Google Search API. The reference project displays all type of results including HTML and non-HTML files. The formats we experimented so far are: docx, ppt, pdf. We tried to get the format of the documents in top 10 results using "fileFormat" key, but in that case we need to establish more checks since it will give an error for HTML files. Even if we introduce the check, we do not find it necessary since the reference project includes all the HTML and non-HTML files and the Google Search API includes all file formats for the API call return object. Therefore, there is no need to filter the documents based on their format. We are also not allowed to change the API call configuration and we are specifically working with what Google Search API is returning to us. For example, the reference project result for query "example docx":
 
-```
-Title: COLUMBIA-SUICIDE SEVERITY RATING SCALE (C-SSRS)
-URL: https://cssrs.columbia.edu/wp-content/uploads/C-SSRS_Pediatric-SLC_11.14.16.pdf
-Summary: Definitions of behavioral suicidal events in this scale are based on those used in The Columbia Suicide History. Form, developed by John Mann, ...
-```
+Result 2
+[
+ URL: https://calibre-ebook.com/downloads/demos/demo.docx
+ Title: DOCX Demo
+ Summary: This document demonstrates the ability of the calibre DOCX Input plugin to ... For example, here is a link pointing to the calibre download page. Then we ...
+]
+
+Our result for the same query:
+
+Result 2:
+Title: DOCX Demo
+URL: https://calibre-ebook.com/downloads/demos/demo.docx
+Summary: This document demonstrates the ability of the calibre DOCX Input plugin to ... For example, here is a link pointing to the calibre download page. Then we ...
 
 ## Detailed description of query-modification method
 

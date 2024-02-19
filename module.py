@@ -2,6 +2,10 @@ import pprint
 from string import punctuation
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
+from gensim.models import FastText
+from sklearn.metrics.pairwise import cosine_similarity
+
+
 
 # read stop words from the project file
 stop_words = []
@@ -37,32 +41,39 @@ def calc_weights(original_query, relevant_docs):
   """
   Calculate weights of original query and relevant documents.
   """
-    
+  relevant_docs.append(original_query)
   docs_rem_sw = remove_stop_words(relevant_docs)
-
+  
   # Vectorize
   vectorizer = TfidfVectorizer(stop_words=stop_words, token_pattern=r"(?u)\S\S+")
   X = vectorizer.fit_transform(docs_rem_sw)
-  query_embedding = vectorizer.transform([original_query]) # no need to relearn
 
   # Get cosine similarities for relevant_docs
-  cosine_similarities = query_embedding.dot(X.T).toarray()[0]
-  highest_similarity_index = cosine_similarities.argmax()
-  # Get the similarity score
-  most_similar = docs_rem_sw[highest_similarity_index].split()
   query_list = original_query.split()
   # Extract the features and sort by sum of weights
   dict_of_weights = {}
   feature_names = vectorizer.get_feature_names_out()
   dense_tfidf_matrix = X.toarray()
   df_tfidf = pd.DataFrame(dense_tfidf_matrix, columns=feature_names)
-  for word in most_similar:
+  for word in feature_names:
     # Avoid the word which is already in the query
     if word in query_list:
       continue
     if word in df_tfidf:
       dict_of_weights[word] = df_tfidf[word].sum()
   return dict_of_weights
+
+def find_similarity(relevant_docs, query, words):
+  res = {}
+  model = FastText(sentences=relevant_docs)
+  word1_embedding = model.wv[query].reshape(1, -1)
+  for w in words: # words with equal scores
+    # Reshape the arrays to match the expected input shape of cosine_similarity
+    word2_embedding = model.wv[w].reshape(1, -1)
+    # Calculate cosine similarity
+    similarity = cosine_similarity(word1_embedding, word2_embedding)[0][0]
+    res[w] = similarity
+  return res
 
 def extract_new_words(original_query, relevant_docs):
   """
@@ -79,22 +90,20 @@ def extract_new_words(original_query, relevant_docs):
   second_max_value = max(unique_values) if unique_values else None
 
   words_with_max_weight = []
+  words_with_second_max_weight = []
   # Match the maximum weight value to get the word from dictionary
   for k,v in dict_of_weights.items():
     if v == max_value:
       words_with_max_weight.append(k)
-  words_with_second_max_weight = []
-  # In the event if there is only one unique word with highest score
-  if len(words_with_max_weight) == 1:
-    if second_max_value is not None:
-      for k,v in dict_of_weights.items():
-        if v == second_max_value:
-          words_with_second_max_weight.append(k)
-    else:
-      return words_with_max_weight
-    # Sort alphabetically
-    sorted_list = sorted(words_with_second_max_weight)
-    return [words_with_max_weight[0], sorted_list[0]]
-  # Return alphabetically sorted two new words to append to the original query
-  sorted_list = sorted(words_with_max_weight)
-  return [sorted_list[-1], sorted_list[-2]]
+    if v == second_max_value:
+      words_with_second_max_weight.append(k)
+  first_dict = find_similarity(relevant_docs, original_query, words_with_max_weight)
+  second_dict = find_similarity(relevant_docs, original_query, words_with_second_max_weight)
+
+  max_key = max(first_dict, key=lambda k: first_dict[k])
+  first_dict.pop(max_key)
+  if len(first_dict) == 0:
+    second_max_key = max(second_dict, key=lambda k: second_dict[k])
+  else:
+    second_max_key = max(first_dict, key=lambda k: first_dict[k])
+  return [max_key, second_max_key]
